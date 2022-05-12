@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: kafka-zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+    networks:
+      - docker_default
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
+      KAFKA_CFG_ZOOKEEPER_CONNECT: kafka-zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: yes
+      #KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      #- KAFKA_LOG_RETENTION_BYTES=1073741824
+    depends_on:
+      - kafka-zookeeper
+    networks:
+      - docker_default
+
+networks: 
+  docker_default:
+    driver: bridge

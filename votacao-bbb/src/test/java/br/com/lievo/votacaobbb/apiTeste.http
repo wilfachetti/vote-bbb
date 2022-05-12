@@ -1,0 +1,44 @@
+GET http://localhost:8080/api/parameters/query?key=config.votacao
+
+###
+POST http://localhost:8080/api/parameters/save
+Content-Type: application/json
+
+{
+    "key":"config.votacao", 
+    "value":"4"
+}
+
+###
+POST http://localhost:8080/api/participant/save
+Content-Type: application/json
+
+{
+    "name":"Albelito"
+}
+
+###
+POST http://localhost:8080/api/participant/save
+Content-Type: application/json
+
+{
+    "name":"Belenito"
+}
+
+###
+POST http://localhost:8080/api/participant/save
+Content-Type: application/json
+
+{
+    "name":"Duolito"
+}
+
+
+###
+POST http://localhost:8080/api/voting
+Content-Type: application/json
+
+{
+    "id":"626bf92197513b61af7f8c95",
+    "name":"Albelito"
+}
